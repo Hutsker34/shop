@@ -1,0 +1,33 @@
+.header{
+    display: flex;
+    justify-content: space-around;
+    background: #C87A7A;
+    padding: 15px 190px 15px 190px;
+    position: sticky;
+    top: 0;
+}
+.header__info{
+    display: flex;
+}
+.header__name{
+    margin: 0 45px 0 0;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 37px;
+}
+.header__logo{
+    width: 50px;
+    margin: 0 30px 0 10px;
+}
+.header__input{
+    background: #D9D9D9;
+    border: none;
+    border-radius: 51px;
+    width: 200px;
+    padding: 0 0 0 10px;
+    height: 30px;
+    margin-top: 14px;
+}
+.header__basket{
+    width: 40px;
+}

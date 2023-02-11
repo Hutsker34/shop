@@ -1,0 +1,54 @@
+html , body{
+    height: 100%;
+}
+#root{
+    height: 100%;
+}
+.basket{
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.basket__article{
+    background: #D9D9D9;
+    min-height: 100%;
+    flex-grow: 10;
+}
+.App{
+    height: 100%;
+}
+.basket__article--wrap{
+    display: flex; 
+    justify-content: space-around;
+    padding: 20px 450px ;
+}
+.payment__input{
+    background: #5350EE;
+    border: none;
+    border-radius: 30px;
+    padding: 5px 5px 5px 5px;
+    margin: 0 20px 20px 0;
+    width: 100px;
+}
+
+.basket__article--payment{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 475px ;
+}
+.payment__card--number{
+    width: 370px;
+}
+.payment__button{
+    background: #EA5D5D;
+    border:none;
+    padding: 10px 40px 10px 40px;
+    font-size: 16px;
+    border-radius: 30px;
+    font-weight: 500;
+}
+.payment__button:hover{
+    background: #a74d4d;
+    color: white;
+}
