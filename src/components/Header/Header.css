@@ -31,3 +31,7 @@
 .header__basket{
     width: 40px;
 }
+.basket__link{
+    text-decoration: none;
+    color: black;
+}

@@ -4,8 +4,8 @@ import cap from '../../assets/cap.jpg'
 import glasses from '../../assets/glasses.jpg'
 import pants from '../../assets/pants.jpg'
 
-
-function Article(){
+function Article(props){
+    
     let mus = [
     {
         name: 'cap',
@@ -17,7 +17,7 @@ function Article(){
         name: 'glasses',
         img: glasses,
         cost: '1,99$',
-        id: 3
+        id: 2
     },
     {
         name: 'pants',
@@ -26,11 +26,11 @@ function Article(){
         id: 3
     },
 ]
-
+    
     return(
         <div className='article'>
             {mus.map((item,index)=> {
-                return <Product {...item} key={index}/>
+                return <Product  {...item} key={index}/>
             })}
         </div>
     )

@@ -6,7 +6,7 @@ import { useSelector} from 'react-redux'
 
 function Basket(){
     let mus = useSelector((state) => state.article.products)
-    console.log(mus)
+    
 
     return(
         <div className='basket'>
@@ -14,7 +14,11 @@ function Basket(){
             <article className='basket__article'>
                 <div className='basket__article--wrap'>
                     {mus.map((item,index)=> {
-                        return <Product {...item} key={index}/>
+                        const product = {
+                            ...item, 
+                            showDeleteBtn: true
+                        }
+                        return <Product {...product} key={index}/>
                     })}
                 </div>
                 <div className='basket__article--payment'>

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   value: 0,
   products: [],
+  product: {},
 };
 
 export const articleSlice = createSlice({
@@ -13,7 +14,7 @@ export const articleSlice = createSlice({
       state.value += 1;
       let amount = 1;
       for (let i = 0; i < state.products.length; i++) {
-        if (state.products[i].id == action.payload.id) {
+        if (state.products[i].id === action.payload.id) {
           amount++;
           break;
         }
@@ -29,21 +30,29 @@ export const articleSlice = createSlice({
             return item;
           }
         });
-
         state.products = newState;
       } else {
         state.products = [...state.products, { ...action.payload, amount }];
       }
     },
-    decrement: (state) => {
-      state.value -= 1;
+    currentProduct: (state, action) => {
+      state.product = action.payload;
     },
+    decrement: (state, action) => {
+      state.value -= 1;
+
+      state.products =state.products.filter((item) => {
+        return item.id !== action.payload
+      })
+    }
+    
+  },
     incrementByAmount: (state, action) => {
       state.value += action.payload;
     },
   },
-});
+);
 
-export const { increment, decrement, incrementByAmount } = articleSlice.actions;
+export const {  currentProduct,increment, decrement, incrementByAmount } = articleSlice.actions;
 
 export default articleSlice.reducer;

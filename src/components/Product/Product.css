@@ -3,13 +3,18 @@
     height: 300px;
     background: #cdedc1;
     margin: 20px 0 20px 0;
+    text-decoration: none;
+    color: black;
+    
 }
+
+
 .product{
     display: flex;
     flex-direction: column
 }
 .product__img{
-    height: 69%;
+    height: 200px;
     width: 100%;
 }
 .product__info{
@@ -42,11 +47,24 @@
     padding: 5px 8px;
     font-size: 13px;
     margin: 5px 0 15px 0;
+    text-decoration: none;
     
 }
+
 .product__info--btn:hover{
-    background:#b14747 ;
+    background:red ;
 }
 .product__info--wrap{
     display: flex;
+}
+.button__wrap{
+    display: flex;
+    
+
+
+}
+.button__wrap--delete{
+    margin: 5px 0 0 15px;
+    color : rgb(252, 0, 0);
+    font-weight: 600;
 }
