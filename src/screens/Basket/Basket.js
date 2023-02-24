@@ -20,6 +20,12 @@ function Basket(){
                         }
                         return <Product {...product} key={index}/>
                     })}
+                    {mus.length == 0 &&
+                        <p className="article__wrap--validation">
+                            здесь пока ничего нет(
+                        </p>
+                    }
+                    
                 </div>
                 <div className='basket__article--payment'>
                     <input className='payment__input payment__card--number'/>

@@ -52,3 +52,8 @@ html , body{
     background: #a74d4d;
     color: white;
 }
+.article__wrap--validation{
+    font-size: 32px;
+    color: grey;
+    font-weight: 300;
+}

@@ -34,16 +34,28 @@ export const articleSlice = createSlice({
       } else {
         state.products = [...state.products, { ...action.payload, amount }];
       }
+      
     },
     currentProduct: (state, action) => {
       state.product = action.payload;
     },
     decrement: (state, action) => {
       state.value -= 1;
+      let amount = 0 
+      for (let i = 0; i < state.products.length; i++) {
+        if (state.products[i].id == action.payload) {
+          amount = state.products[i].amount;
+          state.products[i].amount -= 1 
+          break;
+        }
+      }
 
-      state.products =state.products.filter((item) => {
-        return item.id !== action.payload
-      })
+      console.log('rrr',amount)
+      if (amount <= 1) {
+        state.products =state.products.filter((item) => {
+          return item.id !== action.payload
+        })
+      }
     }
     
   },
