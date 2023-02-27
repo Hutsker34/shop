@@ -1,12 +1,19 @@
 import './Product.css'
+
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { increment } from '../Article/articleSlice'
 import { currentProduct } from '../Article/articleSlice'
-import { decrement } from '../Article/articleSlice'
+
+
 
 function Product(props){
     const dispatch = useDispatch()
+    console.log(props)
+    function clickDelete(){
+        let {openModal ,showDeleteBtn , ...rest} = props
+        props.openModal(rest)
+    }
     
     return(
         <div className='product'>
@@ -21,9 +28,10 @@ function Product(props){
                 <span>{props.amount}</span>
                 <div className='button__wrap'>
                     <button onClick={() => dispatch(increment(props))} className='product__info--btn'>add to basket</button>
-                    {props.showDeleteBtn && <span onClick={() => dispatch(decrement(props.id))} className='button__wrap--delete'>delete</span> }
+                    {props.showDeleteBtn && 
+                    <span onClick={clickDelete}  className='button__wrap--delete'>delete</span> 
+                    }
                 </div>
-                    
             </div>
         </div>
     )

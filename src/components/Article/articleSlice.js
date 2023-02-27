@@ -50,7 +50,7 @@ export const articleSlice = createSlice({
         }
       }
 
-      console.log('rrr',amount)
+      
       if (amount <= 1) {
         state.products =state.products.filter((item) => {
           return item.id !== action.payload
