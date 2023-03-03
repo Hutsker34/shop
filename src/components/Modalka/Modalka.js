@@ -3,7 +3,7 @@ import './Modalka.css'
 
 function Modalka(props){
     function clickYes(){
-        props.ale() 
+        props.modalOpen() 
         props.setVisible(false)
     }
     if(!props.visible){

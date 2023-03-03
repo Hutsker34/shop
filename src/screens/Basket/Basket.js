@@ -46,7 +46,7 @@ function Basket(){
                         </div>
                     <button className='payment__button'>buy</button>
                 </div>
-                <Modalka ale = {() => dispatch(decrement(_currentProduct.id))} visible = {visible} setVisible = {setVisible}/>
+                <Modalka modalOpen = {() => dispatch(decrement(_currentProduct.id))} visible = {visible} setVisible = {setVisible}/>
             </article>
             <Footer/>
         </div>
