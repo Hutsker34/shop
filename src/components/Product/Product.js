@@ -2,18 +2,20 @@ import './Product.css'
 
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { increment } from '../Article/articleSlice'
+import { increment, openModal } from '../Article/articleSlice'
 import { currentProduct } from '../Article/articleSlice'
 
 
 
 function Product(props){
     const dispatch = useDispatch()
-    console.log(props)
+    
     function clickDelete(){
-        let {openModal ,showDeleteBtn , ...rest} = props
-        props.openModal(rest)
+        dispatch(currentProduct(props))
+        dispatch(openModal())
     }
+    
+    
     
     return(
         <div className='product'>

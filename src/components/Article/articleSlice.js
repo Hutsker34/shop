@@ -4,6 +4,7 @@ const initialState = {
   value: 0,
   products: [],
   product: {},
+  visible: false
 };
 
 export const articleSlice = createSlice({
@@ -42,29 +43,39 @@ export const articleSlice = createSlice({
     decrement: (state, action) => {
       state.value -= 1;
       let amount = 0 
-      for (let i = 0; i < state.products.length; i++) {
-        if (state.products[i].id == action.payload) {
-          amount = state.products[i].amount;
-          state.products[i].amount -= 1 
-          break;
-        }
-      }
-
       
-      if (amount <= 1) {
-        state.products =state.products.filter((item) => {
-          return item.id !== action.payload
-        })
-      }
-    }
-    
-  },
+        for (let i = 0; i < state.products.length; i++) {
+          if (state.products[i].id == action.payload) {
+            amount = state.products[i].amount;
+            state.products[i].amount -= 1 
+            break;
+          }
+        }
+  
+        
+        if (amount <= 1) {
+          state.products =state.products.filter((item) => {
+            return item.id !== action.payload
+          })
+        }
+      
+      state.visible = false
+      
+    },
+    openModal: (state) => {
+      state.visible = true
+    },
+    closeModal: (state) => {
+      state.visible = false
+    },
     incrementByAmount: (state, action) => {
       state.value += action.payload;
     },
   },
+    
+  },
 );
 
-export const {  currentProduct,increment, decrement, incrementByAmount } = articleSlice.actions;
+export const {  currentProduct,increment, decrement, incrementByAmount, closeModal , openModal} = articleSlice.actions;
 
 export default articleSlice.reducer;
