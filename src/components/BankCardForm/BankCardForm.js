@@ -135,9 +135,13 @@ function BankCardForm() {
 // 	ccvCard.textContent = ccvCardForm.value;
 // });
     const [ value , setValue ] = useState('#### #### #### ####')
+	const [name , setName] = useState('name')
     function onChange(event){
         setValue(event.target.value)
     }
+	function changeName(event){
+		setName(event.target.value)
+	}
 
     return (
         <div class="container">
@@ -163,7 +167,7 @@ function BankCardForm() {
 						</p>
 						
 						<p class="name-card">
-							John Doe
+							{name}
 						</p>
 					</div>
 					
@@ -243,7 +247,7 @@ function BankCardForm() {
 				Nombre				
 			</label>
 			
-			<input type="text" id="name-card-form" maxlength="20" autocomplete="off"/>
+			<input onChange={changeName} name = {value} type="text" id="name-card-form" maxlength="20" autocomplete="off"/>
 		</div>
 		
 		<div class="flexbox">
