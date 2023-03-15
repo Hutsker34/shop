@@ -1,5 +1,7 @@
 import './BankCardForm.css'
 import { useState } from 'react'
+import classNames from 'classnames/bind';
+
 
 function BankCardForm() {
 //     // Tarjeta
@@ -22,20 +24,20 @@ function BankCardForm() {
 // const ccvCardForm = document.getElementById('ccv-card-form');
 
 // const showFrontCard = () => {
-// 	if ( card.classList.contains('active') ) {
-// 		card.classList.remove('active');
+// 	if ( card.classNameList.contains('active') ) {
+// 		card.classNameList.remove('active');
 // 	}
 // }
 
 // // Rotación de la tarjeta
 // card.addEventListener('click', () => {
-// 	card.classList.toggle('active');
+// 	card.classNameList.toggle('active');
 // });
 
 // // Abrir formulario
 // btnOpenForm.addEventListener('click', () => {
-// 	btnOpenForm.classList.toggle('active');
-// 	formCard.classList.toggle('active');
+// 	btnOpenForm.classNameList.toggle('active');
+// 	formCard.classNameList.toggle('active');
 // });
 
 // // Llenar el select del mes dinamicamente
@@ -122,8 +124,8 @@ function BankCardForm() {
 
 // // Ccv
 // ccvCardForm.addEventListener('keyup', e => {
-// 	if ( !card.classList.contains('active') ) {
-// 		card.classList.add('active');
+// 	if ( !card.classNameList.contains('active') ) {
+// 		card.classNameList.add('active');
 // 	}
 	
 // 	ccvCardForm.value = ccvCardForm.value
@@ -136,53 +138,82 @@ function BankCardForm() {
 // });
     const [ value , setValue ] = useState('#### #### #### ####')
 	const [name , setName] = useState('name')
+	const [selected, setSelected] = useState('selected')
+	const [active, setActive] = useState(false)
+	const [activeForm, setActiveForm] = useState(true)
+	const [month, setMonth] = useState('MM')
+	const [year , setYear] = useState('AA')
+	const [ccv , setCcv] = useState('')
     function onChange(event){
         setValue(event.target.value)
+		setActive(false)
     }
 	function changeName(event){
 		setName(event.target.value)
+		setActive(false)
+	}
+	function changeSelected(event){
+		setSelected(event.target.value)
+	}
+	function changeActive(){
+		setActive(!active)
+	}
+	function changeActiveForm(){
+		setActiveForm(!activeForm)
+	}
+	function changeMonth(event){
+		setMonth(event.target.value)
+		setActive(false)
+	}
+	function changeYear(event){
+		setYear(event.target.value)
+		setActive(false)
+	}
+	function changeCcv(event){
+		setCcv(event.target.value)
+		setActive(true)
 	}
 
     return (
-        <div class="container">
-	<section id="card" class="card">
-		<div class="front-card">
-			<div id="logo-card" class="logo-card"></div>
-			<img src="https://firebasestorage.googleapis.com/v0/b/fire-fotos-8e3f9.appspot.com/o/img%2Fchip-tarjeta.png?alt=media&token=489dc6be-d75d-47db-b544-e7020041cc90" alt="Chip" title="Chip" class="chip"/>
-			<div class="info-card-front">
-				<div id="group-number-card" class="group-number-card">
-					<p class="label-card">
+        <div className="container">
+	<section id="card" onClick={changeActive}  className={classNames('card',{active: active})}>
+		<div className="front-card">
+			<div id="logo-card" className="logo-card"></div>
+			<img src="https://firebasestorage.googleapis.com/v0/b/fire-fotos-8e3f9.appspot.com/o/img%2Fchip-tarjeta.png?alt=media&token=489dc6be-d75d-47db-b544-e7020041cc90" alt="Chip" title="Chip" className="chip"/>
+			<div className="info-card-front">
+				<div id="group-number-card" className="group-number-card">
+					<p className="label-card">
 						Número Tarjeta
 					</p>
 					
-					<p class="number-card">
+					<p className="number-card">
 						{value}
 					</p>
 				</div>
 				
-				<div class="flexbox">
-					<div id="group-name-card" class="group-name-card">
-						<p class="label-card">
+				<div className="flexbox">
+					<div id="group-name-card" className="group-name-card">
+						<p className="label-card">
 							Nombre Tarjeta
 						</p>
 						
-						<p class="name-card">
+						<p className="name-card">
 							{name}
 						</p>
 					</div>
 					
-					<div id="group-expiration-card" class="group-expiration-card">
-						<p class="label-card">
+					<div id="group-expiration-card" className="group-expiration-card">
+						<p className="label-card">
 							Expiración
 						</p>
 						
-						<p class="expiration-card">
-							<span class="mounth-expiration-card">
-								MM
+						<p className="expiration-card">
+							<span className="mounth-expiration-card">
+								{month}
 							</span>
 							/
-							<span class="year-expiration-card">
-								AA
+							<span className="year-expiration-card">
+								{year}
 							</span>
 						</p>
 					</div>
@@ -190,103 +221,114 @@ function BankCardForm() {
 			</div>			
 		</div>
 		
-		<div class="back-card">
-			<div class="magnetic-bar-card"></div>
+		<div className="back-card">
+			<div className="magnetic-bar-card"></div>
 			
-			<div class="info-card-back">
-				<div id="group-firm-card" class="group-firm-card">
-					<p class="label-card">
+			<div className="info-card-back">
+				<div id="group-firm-card" className="group-firm-card">
+					<p className="label-card">
 						Firma
 					</p>
 					
-					<div class="firm-card">
+					<div className="firm-card">
 						<p>
-							John Doe
+							{name}
 						</p>
 					</div>
 				</div>
 				
-				<div id="group-ccv-card" class="group-ccv-card">
-					<p class="label-card">
+				<div id="group-ccv-card" className="group-ccv-card">
+					<p className="label-card">
 						CCV
 					</p>
 					
-					<p class="ccv-card"></p>
+					<p className="ccv-card">{ccv}</p>
 				</div>
 			</div>
 			
-			<p class="legend-card">
+			<p className="legend-card">
 				Lorem ipsum dolor sit amet consectetur
 			</p>
 			
-			<a class="link-bank-card" href="javascript:void(0);">
+			<a className="link-bank-card" href="">
 				www.tubanco.com
 			</a>
 		</div>
 	</section>
 	
 	
-	<div class="ctn-btn">
-		<button type="button" id="btn-open-form-card" class="btn-open-form-card">
-			<i class="fas fa-plus"></i>
+	<div className="ctn-btn">
+		<button onClick={changeActiveForm} type="button" id="btn-open-form-card" className="btn-open-form-card">
+			<i className="fas fa-plus"></i>
 		</button>
 	</div>
 	
 	
-	<form action="javascript:void(0);" id="form-card" class="form-card active">
+	<form action="" id="form-card"    className={classNames('form-card',{active: activeForm})}>
 		<div>
-			<label for="number-card-form">
+			<label htmlFor="number-card-form">
 				Número Tarjeta				
 			</label>
 			
-			<input onChange={onChange} value = {value} type="text" id="number-card-form" maxlength="19" autocomplete="off"/>
+			<input onChange={onChange} value = {value} type="text" id="number-card-form" maxLength="19" autoComplete="off"/>
 		</div>
 		
 		<div>
-			<label for="name-card-form">
+			<label htmlFor="name-card-form">
 				Nombre				
 			</label>
 			
-			<input onChange={changeName} name = {value} type="text" id="name-card-form" maxlength="20" autocomplete="off"/>
+			<input onChange={changeName} name = {value} type="text" id="name-card-form" maxLength="20" autoComplete="off"/>
 		</div>
 		
-		<div class="flexbox">
-			<div class="group-expiration-card-form">
-				<label for="mounth-expiration-card-form">
+		<div className="flexbox">
+			<div className="group-expiration-card-form">
+				<label htmlFor="mounth-expiration-card-form">
 					 Expiración
 				</label>
 				
-				<div class="flexbox">
-					<div class="group-select">
-						<select id="mounth-expiration-card-form">
-							<option disabled="disabled" selected="selected">
-								Mes
+				<div className="flexbox">
+					<div className="group-select">
+						<select  onChange={changeMonth} selected={selected} id="mounth-expiration-card-form">
+							<option value={"Mes"} disabled >
+								mes
 							</option>
+							{
+								new Array(12).fill(0).map((item, index)=>index+1).map((item, index) => {
+									return <option key={item} value={item}>{item}</option>
+								})
+							}
+							
 						</select>
-						<i class="fas fa-angle-down"></i>
+						<i className="fas fa-angle-down"></i>
 					</div>
 					
-					<div class="group-select">
-						<select id="year-expiration-card-form">
-							<option disabled="disabled" selected="selected">
-								Año
+					<div className="group-select">
+						<select onChange={changeYear} selected={selected} id="year-expiration-card-form">
+							<option value={"ANO"} disabled >
+								ano
 							</option>
+							{
+								new Array(9).fill(2023).map((item, index)=>item+index).map((item, index) => {
+									return <option key={item} value={item}>{item}</option>
+								})
+							}
 						</select>
-						<i class="fas fa-angle-down"></i>
+						<i className="fas fa-angle-down"></i>
 					</div>
 				</div>
 			</div>
 			
-			<div class="group-ccv-card-form">
-				<label for="ccv-card-form">
+			<div className="group-ccv-card-form">
+				<label htmlFor="ccv-card-form">
 					CCV
 				</label>
 
-				<input type="text" id="ccv-card-form" maxlength="3" autocomplete="off"/>
+				<input onChange={changeCcv} type="text" id="ccv-card-form" maxLength="3" autoComplete="off"/>
 			</div>
 		</div>
 		
-		<button type="submit" class="btn-send-form-card">
+		<button type="submit" className="btn-send-form-card">
 			Enviar
 		</button>
 	</form>
