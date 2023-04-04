@@ -5,7 +5,7 @@ import './Basket.css'
 import { useDispatch, useSelector} from 'react-redux'
 import Modalka from "../../components/Modalka/Modalka";
 import { decrement, openModal } from "../../components/Article/articleSlice";
-import BankCardForm from "../../components/BankCardForm/BankCardForm";
+import { Link } from "react-router-dom";
 
 
 
@@ -42,15 +42,9 @@ function Basket(){
 
                 </div>
                 <div className="generalCost">{generalcost()}</div>
-                {/* <div className='basket__article--payment'>
-                    <input className='payment__input payment__card--number'/>
-                        <div className='payment__wrap'>
-                            <input className='payment__input'/>
-                            <input className='payment__input'/>
-                        </div>
-                    <button className='payment__button'>buy</button>
-                </div> */}
-                <BankCardForm/>
+                <Link className="basket__link" to="/buyForm">
+                    <button >Buy</button>
+                </Link>
                 <Modalka modalOpen = {() => dispatch(decrement(openModal()))} />
             </article>
             <Footer/>

@@ -1,159 +1,34 @@
-import './BankCardForm.css'
-import { useState } from 'react'
+import './BankCardForm.css';
+import { useState } from 'react';
 import classNames from 'classnames/bind';
+import { useCreditCardValidator} from 'react-creditcard-validator';
+
+
 
 
 function BankCardForm() {
-//     // Tarjeta
-// const card = document.querySelector('#card');
-// const logoCard = document.getElementById('logo-card');
-// const numberCard = document.querySelector('#card .number-card');
-// const nameCard = document.querySelector('#card .name-card');
-// const mounthExpirationCard = document.querySelector('#card .mounth-expiration-card');
-// const yearExpirationCard = document.querySelector('#card .year-expiration-card');
-// const firmCard = document.querySelector('#card .firm-card p');
-// const ccvCard = document.querySelector('#card .ccv-card');
-
-// // Formulario Tarjeta
-// const btnOpenForm = document.getElementById('btn-open-form-card');
-// const formCard = document.getElementById('form-card');
-// const numberCardForm = document.getElementById('number-card-form');
-// const nameCardForm = document.getElementById('name-card-form');
-// const selectMounthCardForm = document.getElementById('mounth-expiration-card-form');
-// const selectYearCardForm = document.getElementById('year-expiration-card-form');
-// const ccvCardForm = document.getElementById('ccv-card-form');
-
-// const showFrontCard = () => {
-// 	if ( card.classNameList.contains('active') ) {
-// 		card.classNameList.remove('active');
-// 	}
-// }
-
-// // Rotación de la tarjeta
-// card.addEventListener('click', () => {
-// 	card.classNameList.toggle('active');
-// });
-
-// // Abrir formulario
-// btnOpenForm.addEventListener('click', () => {
-// 	btnOpenForm.classNameList.toggle('active');
-// 	formCard.classNameList.toggle('active');
-// });
-
-// // Llenar el select del mes dinamicamente
-// for (let i = 1; i <= 12; i++) {
-// 	let option = document.createElement('option');
-// 	option.value = i;
-// 	option.innerText = i;
-// 	selectMounthCardForm.appendChild(option);
-// }
-
-// // Llenar el select del año dinamicamente
-// let currentYear = new Date().getFullYear();
-
-// for (let i = currentYear; i <= currentYear + 8; i++) {
-// 	let option = document.createElement('option');
-// 	option.value = i;
-// 	option.innerText = i;
-// 	selectYearCardForm.appendChild(option);
-// }
-
-// // Número de tarjeta
-// numberCardForm.addEventListener('keyup', e => {
-// 	let valueNumberCardForm = e.target.value
-// 		// Eliminar espacios en blanco
-// 		.replace(/\s/g, '')
-// 		// Eliminar todos los caracteres que no sean números del 0 al 9
-// 		.replace(/\D/g, '')
-// 		// Colocamos espacio cada cuatro caracteres
-// 		.replace(/([0-9]{4})/g, '$1 ')
-// 		.trim();
-// 	numberCardForm.value = valueNumberCardForm;
-	
-// 	numberCard.textContent = valueNumberCardForm;
-	
-// 	if ( valueNumberCardForm === '' ) {
-// 		numberCard.textContent = '#### #### #### ####';
-// 		logoCard.innerHTML = '';
-// 	}
-	
-// 	if ( valueNumberCardForm[0] === '4' ) {
-// 		logoCard.innerHTML = '';
-// 		let imgLogo = document.createElement('img');
-// 		imgLogo.src = 'https://firebasestorage.googleapis.com/v0/b/fire-fotos-8e3f9.appspot.com/o/img%2Fvisa.png?alt=media&token=d1324d01-81f6-42d4-a37c-1edc19e1e0b1';
-// 		logoCard.appendChild(imgLogo);
-// 	} else if ( valueNumberCardForm[0] === '5' ) {
-// 			logoCard.innerHTML = '';
-// 			let imgLogo = document.createElement('img');
-// 			imgLogo.src = 'https://firebasestorage.googleapis.com/v0/b/fire-fotos-8e3f9.appspot.com/o/img%2Fmastercard.png?alt=media&token=1a5347d2-a282-436f-87a8-f193458830f4';
-// 			logoCard.appendChild(imgLogo);
-// 		}
-	
-// 	// Voltear la tarjeta para que el usuario vea el frente
-// 	showFrontCard();
-	
-// });
-
-// // Formulario nombre tarjeta
-// nameCardForm.addEventListener('keyup', e => {
-// 	let valueNameCardForm = e.target.value.replace(/[0-9]/g, '');
-	
-// 	nameCardForm.value = valueNameCardForm;
-// 	nameCard.textContent = valueNameCardForm;
-// 	firmCard.textContent = valueNameCardForm;
-	
-// 	if ( valueNameCardForm === '' ) {
-// 		nameCard.textContent = 'John Doe';
-// 	}
-	
-// 	showFrontCard();
-// });
-
-// // Select mes
-// selectMounthCardForm.addEventListener('change', e => {
-// 	mounthExpirationCard.textContent = e.target.value;
-// 	showFrontCard();
-// });
-
-
-// // Select año
-// selectYearCardForm.addEventListener('change', e => {
-// 	yearExpirationCard.textContent = e.target.value.slice(2);
-// 	showFrontCard();
-// });
-
-// // Ccv
-// ccvCardForm.addEventListener('keyup', e => {
-// 	if ( !card.classNameList.contains('active') ) {
-// 		card.classNameList.add('active');
-// 	}
-	
-// 	ccvCardForm.value = ccvCardForm.value
-// 	// Eliminar espacios en blanco
-// 	.replace(/\s/g, '')
-// 	// Eliminar todos los caracteres que no sean números del 0 al 9
-// 	.replace(/\D/g, '');
-	
-// 	ccvCard.textContent = ccvCardForm.value;
-// });
-    const [ value , setValue ] = useState('#### #### #### ####')
+	const date = new Date()
+    const [ value , setValue ] = useState('')
 	const [name , setName] = useState('name')
 	const [selected, setSelected] = useState('selected')
 	const [active, setActive] = useState(false)
 	const [activeForm, setActiveForm] = useState(true)
-	const [month, setMonth] = useState('MM')
-	const [year , setYear] = useState('AA')
+	const [month, setMonth] = useState(date.getMonth())
+	const [year , setYear] = useState(date.getFullYear())
 	const [ccv , setCcv] = useState('')
-    function onChange(event){
-        setValue(event.target.value)
-		setActive(false)
-    }
+
+	
+
+	const {
+		getCardNumberProps,
+		// meta: { erroredInputs }
+	} = useCreditCardValidator();
+	
+
+    
 	function changeName(event){
 		setName(event.target.value)
 		setActive(false)
-	}
-	function changeSelected(event){
-		setSelected(event.target.value)
 	}
 	function changeActive(){
 		setActive(!active)
@@ -173,6 +48,29 @@ function BankCardForm() {
 		setCcv(event.target.value)
 		setActive(true)
 	}
+	function getProps(event){
+
+		const cardInfo = {
+			cardNumber: value,
+			name,
+			month,
+			year,
+			ccv
+		}
+
+		event.preventDefault();
+		console.log(cardInfo)
+	}
+	const obj = getCardNumberProps()
+	const {onChange: onCardChange,...rest} = obj
+
+	function onChange(event){
+		onCardChange(event)
+        setValue(event.target.value)
+		setActive(false)
+    }
+
+	
 
     return (
         <div className="container">
@@ -183,7 +81,7 @@ function BankCardForm() {
 			<div className="info-card-front">
 				<div id="group-number-card" className="group-number-card">
 					<p className="label-card">
-						Número Tarjeta
+						Card number
 					</p>
 					
 					<p className="number-card">
@@ -194,7 +92,7 @@ function BankCardForm() {
 				<div className="flexbox">
 					<div id="group-name-card" className="group-name-card">
 						<p className="label-card">
-							Nombre Tarjeta
+							Card name
 						</p>
 						
 						<p className="name-card">
@@ -267,18 +165,33 @@ function BankCardForm() {
 	<form action="" id="form-card"    className={classNames('form-card',{active: activeForm})}>
 		<div>
 			<label htmlFor="number-card-form">
-				Número Tarjeta				
+				Card Number				
 			</label>
 			
-			<input onChange={onChange} value = {value} type="text" id="number-card-form" maxLength="19" autoComplete="off"/>
+			<input 
+				// onChange={onChange} 
+				// value = {value} 
+				id="number-card-form" 
+				maxLength="19" 
+				autoComplete="off"
+				{...rest}
+				onChange={onChange}
+			/>
 		</div>
 		
 		<div>
 			<label htmlFor="name-card-form">
-				Nombre				
+				Name			
 			</label>
 			
-			<input onChange={changeName} name = {value} type="text" id="name-card-form" maxLength="20" autoComplete="off"/>
+			<input
+				onChange={changeName} 
+				name = {value} 
+				type="text" 
+				id="name-card-form" 
+				maxLength="20" 
+				autoComplete="off"
+			/>
 		</div>
 		
 		<div className="flexbox">
@@ -323,12 +236,17 @@ function BankCardForm() {
 				<label htmlFor="ccv-card-form">
 					CCV
 				</label>
-
-				<input onChange={changeCcv} type="text" id="ccv-card-form" maxLength="3" autoComplete="off"/>
+				<input 
+					type="text" 
+					id="ccv-card-form" 
+					autoComplete="off"
+					onChange={changeCcv}
+					maxLength={3}
+				/>
 			</div>
 		</div>
 		
-		<button type="submit" className="btn-send-form-card">
+		<button  onClick={getProps} type="submit" className="btn-send-form-card">
 			Enviar
 		</button>
 	</form>

@@ -3,6 +3,8 @@ import './App.css';
 import Basket from './screens/Basket/Basket';
 import Landing from './screens/Landing/Landing';
 import CardProduct from './screens/CardProduct/CardProduct';
+import BuyScreen from './screens/BuyScreen/BuyScreen';
+
 
 function App() {
   return (
@@ -11,6 +13,7 @@ function App() {
         <Route path='/card-product' element={<CardProduct/>}/>
         <Route path='/' element={<Landing/>}/>
         <Route path='/basket' element={<Basket/>}/>
+        <Route path='/buyForm' element={<BuyScreen/>}/>
       </Routes>
     </div>
   );
