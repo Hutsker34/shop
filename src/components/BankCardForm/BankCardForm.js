@@ -2,7 +2,7 @@ import './BankCardForm.css';
 import { useState } from 'react';
 import classNames from 'classnames/bind';
 import { useCreditCardValidator} from 'react-creditcard-validator';
-
+import axios from 'axios';
 
 
 
@@ -16,7 +16,6 @@ function BankCardForm() {
 	const [month, setMonth] = useState(date.getMonth())
 	const [year , setYear] = useState(date.getFullYear())
 	const [ccv , setCcv] = useState('')
-
 	
 
 	const {
@@ -49,18 +48,24 @@ function BankCardForm() {
 		setActive(true)
 	}
 	function getProps(event){
-
-		const cardInfo = {
-			cardNumber: value,
-			name,
-			month,
-			year,
-			ccv
-		}
-
 		event.preventDefault();
-		console.log(cardInfo)
+		
+		axios.post('http://127.0.0.1:8000',{
+			cardNumber: value,
+			name: name,
+			month: month,
+			year: year,
+			ccv: ccv
+		})
+		.then(res => {
+			console.log(res);
+		})
+		.catch(err =>{
+			console.log(err)
+		})
 	}
+
+
 	const obj = getCardNumberProps()
 	const {onChange: onCardChange,...rest} = obj
 

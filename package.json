@@ -10,6 +10,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.3.4",
     "babel": "^6.23.0",
     "classnames": "^2.3.2",
     "framer-motion": "^10.2.3",
@@ -24,7 +25,7 @@
     "yup": "^1.0.2"
   },
   "scripts": {
-    "serf": "react-scripts start",
+    "serf": "set PORT=2288 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

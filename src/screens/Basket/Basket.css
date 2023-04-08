@@ -18,8 +18,11 @@ html , body{
     height: 100%;
 }
 .basket__article--wrap{
-    display: flex; 
-    justify-content: space-around;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    height: 100%;
     padding: 20px 450px ;
 }
 .payment__input{

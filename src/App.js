@@ -3,7 +3,7 @@ import './App.css';
 import Basket from './screens/Basket/Basket';
 import Landing from './screens/Landing/Landing';
 import CardProduct from './screens/CardProduct/CardProduct';
-import BuyScreen from './screens/BuyScreen/BuyScreen';
+import BuyScreen from './screens/BuyScreen/BuyScreen'
 
 
 function App() {
