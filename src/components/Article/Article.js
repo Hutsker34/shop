@@ -3,15 +3,22 @@ import Product from '../Product/Product'
 import cap from '../../assets/cap.jpg'
 import glasses from '../../assets/glasses.jpg'
 import pants from '../../assets/pants.jpg'
+import axios from 'axios'
 
 function Article(props){
-    
+
+    axios.get('http://127.0.0.1:8000/product/')
+    .then(res => {
+        mus.push(...res.data)
+    })
+    .catch(err => {
+        console.log(err);
+    })
     let mus = [
     {
         name: 'cap',
-        img: cap,
         cost: '3,99$',
-        id: 1
+        
     },
     {
         name: 'glasses',
@@ -30,6 +37,7 @@ function Article(props){
     return(
         <div className='article'>
             {mus.map((item,index)=> {
+                console.log('test',mus)
                 return <Product  {...item} key={index}/>
             })}
         </div>

@@ -50,7 +50,7 @@ function BankCardForm() {
 	function getProps(event){
 		event.preventDefault();
 		
-		axios.post('http://127.0.0.1:8000',{
+		axios.post('http://127.0.0.1:8000/card/',{
 			cardNumber: value,
 			name: name,
 			month: month,

@@ -9,7 +9,7 @@ class BuyScreen extends React.Component{
 
     componentDidMount(){
         let data;
-        axios.get('http://127.0.0.1:8000')
+        axios.get('http://127.0.0.1:8000/card/')
         .then(res => {
             data = res.data;
             this.setState({
