@@ -1,5 +1,5 @@
 import './Product.css'
-
+import {url} from '../../constants'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { increment, openModal } from '../Article/articleSlice'
@@ -20,7 +20,7 @@ function Product(props){
     return(
         <div className='product'>
             <Link onClick={() => dispatch(currentProduct(props))} to='/card-product'>
-                <img src={props.img} alt='clothes' className='product__img'/>
+                <img src={`${url}${props.img}`} alt='clothes' className='product__img'/>
             </Link>
             <div className='product__info'>
                 <div className='product__info--wrap'>

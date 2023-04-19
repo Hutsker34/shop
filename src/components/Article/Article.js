@@ -1,43 +1,33 @@
 import './Article.css'
 import Product from '../Product/Product'
-import cap from '../../assets/cap.jpg'
-import glasses from '../../assets/glasses.jpg'
-import pants from '../../assets/pants.jpg'
+import {url} from '../../constants'
 import axios from 'axios'
+import { useState , useEffect } from 'react';
+
 
 function Article(props){
-
-    axios.get('http://127.0.0.1:8000/product/')
+    let [loading , setLoading] = useState(true)
+    let [products, setProducts] = useState([])
+    useEffect(()=>{
+        axios.get(`${url}/products/`)
     .then(res => {
-        mus.push(...res.data)
+        setProducts(res.data)
+        setLoading(false)
     })
     .catch(err => {
         console.log(err);
-    })
-    let mus = [
-    {
-        name: 'cap',
-        cost: '3,99$',
-        
-    },
-    {
-        name: 'glasses',
-        img: glasses,
-        cost: '1,99$',
-        id: 2
-    },
-    {
-        name: 'pants',
-        img: pants,
-        cost: '2563,92$',
-        id: 3
-    },
-]
-    
+    })  
+    }, [])
+
+
+    if(loading){
+        return(
+            <div>loading</div>
+        )
+    }
     return(
         <div className='article'>
-            {mus.map((item,index)=> {
-                console.log('test',mus)
+            {products.map((item,index)=> {
                 return <Product  {...item} key={index}/>
             })}
         </div>
