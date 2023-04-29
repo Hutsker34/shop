@@ -18,7 +18,7 @@ function Basket(){
             let cost = products[i].cost.replace(',' , '.')
             general += parseFloat(cost) * products[i].amount
         }
-        return 'total cost:  ' + general.toFixed(2) + '$'
+        return   general.toFixed(2) + '$'
     }
 
     return(
@@ -39,12 +39,19 @@ function Basket(){
                             здесь пока ничего нет(
                         </p>
                     }
-
                 </div>
-                <div className="generalCost">{generalcost()}</div>
-                <Link className="basket__link" to="/buyForm">
-                    <button >Buy</button>
-                </Link>
+                {products.length > 0 &&
+                    <div className="generalCost">
+                        <p className="generalCost__p">total cost: </p>
+                        <p className="generalCost__cost">{generalcost()}</p>
+                    </div>
+                }
+                {products.length > 0 &&
+                    <Link className="basket__link" to="/buyForm">
+                        <button className="buy__btn">Buy</button>
+                    </Link>
+                }
+                
                 <Modalka modalOpen = {() => dispatch(decrement(openModal()))} />
             </article>
             <Footer/>

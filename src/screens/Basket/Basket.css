@@ -60,3 +60,27 @@ html , body{
     color: grey;
     font-weight: 300;
 }
+.buy__btn{
+    font-size: 26px;
+    border-radius: 16px;
+    border: none;
+    padding: 5px 40px;
+    background: #EA5D5D;
+}
+.buy__btn:hover{
+    background: #c44848;
+    color: rgb(22, 22, 22);
+    border: 1px solid #852d2d;
+}
+.generalCost{
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+}
+.generalCost__p{
+    font-size: 20px;
+}
+.generalCost__cost{
+    color: #3f8f22;
+    font-weight: 600;
+}
