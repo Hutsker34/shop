@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { increment, openModal } from '../Article/articleSlice'
 import { currentProduct } from '../Article/articleSlice'
+import axios from 'axios'
 
 
 
@@ -14,7 +15,21 @@ function Product(props){
         dispatch(currentProduct(props))
         dispatch(openModal())
     }
-    
+    function addProduct(){
+        dispatch(increment(props))
+
+        axios.post(`${url}/orders/`,{
+            product_ids: [18,17,16,15],
+            user_email: "marc@gmail.com"
+            
+        })
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err);
+        }) 
+    }
     
     
     return(
@@ -29,7 +44,7 @@ function Product(props){
                 </div>
                 <span>{props.amount}</span>
                 <div className='button__wrap'>
-                    <button onClick={() => dispatch(increment(props))} className='product__info--btn'>add to basket</button>
+                    <button onClick={addProduct} className='product__info--btn'>add to basket</button>
                     {props.showDeleteBtn && 
                     <span onClick={clickDelete}  className='button__wrap--delete'>delete</span> 
                     }
