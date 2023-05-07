@@ -19,8 +19,9 @@ function Product(props){
         dispatch(increment(props))
 
         axios.post(`${url}/orders/`,{
-            product_ids: [18,17,16,15],
-            user_email: "marc@gmail.com"
+            product_ids: [15],
+            user_email: "marc@gmail.com",
+            amount: 3
             
         })
         .then(res => {
