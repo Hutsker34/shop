@@ -6,6 +6,8 @@ import { useDispatch, useSelector} from 'react-redux'
 import Modalka from "../../components/Modalka/Modalka";
 import { decrement, openModal } from "../../components/Article/articleSlice";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import {url} from '../../constants'
 
 
 
@@ -19,6 +21,27 @@ function Basket(){
             general += parseFloat(cost) * products[i].amount
         }
         return   general.toFixed(2) + '$'
+    }
+    function addOrder(){
+        let productsId = []
+        let productsAmount = []
+        products.forEach(el => {
+            productsId.push(el.id)
+            productsAmount.push(el.amount)
+        })
+        axios.post(`${url}/orders/`,{
+            product_ids: productsId,
+            user_email: "marc3@gmail.com",
+            amount: productsAmount
+            
+        })
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err);
+        }) 
+        console.log('products',productsId)
     }
 
     return(
@@ -48,7 +71,7 @@ function Basket(){
                 }
                 {products.length > 0 &&
                     <Link className="basket__link" to="/buyForm">
-                        <button className="buy__btn">Buy</button>
+                        <button onClick={addOrder} className="buy__btn">Buy</button>
                     </Link>
                 }
                 

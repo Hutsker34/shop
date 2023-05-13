@@ -4,7 +4,7 @@ const initialState = {
   value: 0,
   products: [],
   product: {},
-  visible: false
+  visible: false,
 };
 
 export const articleSlice = createSlice({

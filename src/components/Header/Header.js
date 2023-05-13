@@ -21,7 +21,7 @@ function Header(){
             </div>
             <div className='header__info'>
                 <p className='header__name'>marc</p>
-                <Link className="basket__link" to="/basket">
+                <Link  className="basket__link" to="/basket">
                     <img className='header__basket' alt='basket' src={icon}/>
                     <span>{count}</span>
                 </Link>

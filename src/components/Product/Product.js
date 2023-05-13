@@ -1,15 +1,16 @@
 import './Product.css'
 import {url} from '../../constants'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { increment, openModal } from '../Article/articleSlice'
 import { currentProduct } from '../Article/articleSlice'
-import axios from 'axios'
+
 
 
 
 function Product(props){
     const dispatch = useDispatch()
+    
     
     function clickDelete(){
         dispatch(currentProduct(props))
@@ -17,19 +18,7 @@ function Product(props){
     }
     function addProduct(){
         dispatch(increment(props))
-
-        axios.post(`${url}/orders/`,{
-            product_ids: [15],
-            user_email: "marc@gmail.com",
-            amount: 3
-            
-        })
-        .then(res => {
-            console.log(res)
-        })
-        .catch(err => {
-            console.log(err);
-        }) 
+        
     }
     
     
