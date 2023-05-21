@@ -1,0 +1,18 @@
+.order__card{
+    display: flex;
+    max-height: 200px;
+    background: white;
+    margin: 25px 0;
+    padding: 20px 0;
+    width: 70%;
+    justify-content: space-around;
+}
+.order__catd--wrap{
+    display: flex;
+    align-items: center;
+
+}
+.order__card--span{
+    margin-top: 20px;
+    font-size: 25px;
+}

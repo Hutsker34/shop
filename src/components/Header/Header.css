@@ -35,3 +35,10 @@
     text-decoration: none;
     color: black;
 }
+.header__name--link{
+    text-decoration: none;
+    color: black;
+}
+.header__name:hover{
+    color:rgb(60, 60, 180);
+}

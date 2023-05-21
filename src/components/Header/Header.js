@@ -3,6 +3,7 @@ import './Header.css'
 import icon from '../../assets/basket.png'
 import logo from '../../assets/logo.png'
 import { useSelector} from 'react-redux'
+import UserProfile from "../../screens/UserProfile/UserProfile";
 
 
 
@@ -20,7 +21,9 @@ function Header(){
                 <input className='header__input'/>
             </div>
             <div className='header__info'>
-                <p className='header__name'>marc</p>
+                <Link className="header__name--link" to="/userProfile">
+                    <p className='header__name'>marc</p>
+                </Link>
                 <Link  className="basket__link" to="/basket">
                     <img className='header__basket' alt='basket' src={icon}/>
                     <span>{count}</span>

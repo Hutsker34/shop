@@ -1,0 +1,21 @@
+.site{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.site__main{
+    height: 100%;
+    padding: 20px 40px;
+    display: flex;
+}
+.site__main--history{
+    font-size: 22px;
+    max-height: 100%;
+}
+.history__link{
+    text-decoration: none;
+    color: black;
+}
+.site__main--history:hover{
+    color: rgb(24, 27, 156);
+}

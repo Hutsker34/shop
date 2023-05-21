@@ -1,0 +1,19 @@
+.site{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.site__main{
+    height: 100%;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.site__main--history{
+    font-size: 22px;
+    max-height: 100%;
+}
+.site__main--history:hover{
+    color: rgb(24, 27, 156);
+}
