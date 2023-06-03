@@ -28,7 +28,7 @@ function OrderInfo(){
     return (
         <div className='site'>
             <Header/>
-            <main>
+            <main className="">
                 {product.map((item,index)=> {
                     return <ProductInOrderCard  {...item} key={index}/>
                 })}

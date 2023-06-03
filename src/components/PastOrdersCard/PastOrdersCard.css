@@ -2,10 +2,11 @@
     display: flex;
     max-height: 200px;
     background: white;
-    margin: 25px 0;
     padding: 20px 0;
     width: 70%;
     justify-content: space-around;
+    margin: 0 auto;
+    margin-top:40px;
 }
 .order__catd--wrap{
     display: flex;

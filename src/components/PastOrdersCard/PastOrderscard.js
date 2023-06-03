@@ -6,8 +6,7 @@ function PastOrdersCard(props) {
     
     
     return(
-        <Link to={`/orderInfo/${props.id}`}>
-            <div className='order__card' >
+            <Link  className='order__card' to={`/orderInfo/${props.id}`}>
                 <span className='order__card--span'>заказ от 7 мая</span>
                 <div className='order__catd--wrap'>
                     {props.products.map((item,index)=> {
@@ -15,8 +14,7 @@ function PastOrdersCard(props) {
                     })}
                 </div>
                 <span className='order__card--span'>оплачено 40$</span>
-            </div>
-        </Link>
+            </Link>
     )
 }
 
