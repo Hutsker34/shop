@@ -17,8 +17,8 @@ function Basket(){
     function generalcost(){
         let general = 0
         for(let i = 0; i < products.length; i++){
-            let cost = products[i].cost.replace(',' , '.')
-            general += parseFloat(cost) * products[i].amount
+            let cost = products[i].cost
+            general += cost * products[i].amount
         }
         return   general.toFixed(2) + '$'
     }
@@ -29,7 +29,7 @@ function Basket(){
             productsId.push(el.id)
             productsAmount.push(el.amount)
         })
-        axios.post(`${url}/orders/`,{
+        axios.post(`${url}/order/`,{
             product_ids: productsId,
             user_email: "marc3@gmail.com",
             amount: productsAmount

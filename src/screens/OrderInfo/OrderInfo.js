@@ -1,6 +1,7 @@
 import Header from "../../components/Header/Header"
 import ProductInOrderCard from "../../components/ProductInOrderCard/ProductInOrderCard"
 import Footer from "../../components/Footer/Footer"
+import './OrderInfo.css'
 import { useParams } from 'react-router-dom';
 import {url} from '../../constants'
 import axios from 'axios'
@@ -10,14 +11,14 @@ import { useState, useEffect } from "react";
 function OrderInfo(){
     const [product , setProducts] = useState([])
     const params = useParams();
+    console.log('123', )
 
     useEffect(() => {
-        axios.get(`${url}/orders/${params.id}/`,{
+        axios.get(`${url}/order/${params.id}/`,{
             user_email: "marc4@gmail.com"
         })
         .then(res => {
             setProducts(res.data.products)
-            console.log(product)
             
         })
         .catch(err => {
@@ -28,7 +29,8 @@ function OrderInfo(){
     return (
         <div className='site'>
             <Header/>
-            <main className="">
+            <main className="site_main">
+                <span></span>
                 {product.map((item,index)=> {
                     return <ProductInOrderCard  {...item} key={index}/>
                 })}

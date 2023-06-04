@@ -5,6 +5,8 @@ const initialState = {
   products: [],
   product: {},
   visible: false,
+  orders: [],
+  
 };
 
 export const articleSlice = createSlice({
