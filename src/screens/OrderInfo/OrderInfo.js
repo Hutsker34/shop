@@ -32,6 +32,7 @@ function OrderInfo(){
                 {product.map((item,index)=> {
                     return <ProductInOrderCard  {...item} key={index}/>
                 })}
+                
             </main>
             <Footer/>
         </div>
