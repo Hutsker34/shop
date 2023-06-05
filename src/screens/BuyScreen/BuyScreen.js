@@ -25,15 +25,6 @@ class BuyScreen extends React.Component{
         <>
             <Header/>
             <BankCardForm/>
-            {this.state.details.map((output, id) => (
-                <div key={id}>
-                    <p>{output.cardNumber}</p>
-                    <p>{output.name}</p>
-                    <p>{output.month}</p>
-                    <p>{output.year}</p>
-                    <p>{output.ccv}</p>
-                </div>
-            ))}
         </>
     )
 }

@@ -6,7 +6,6 @@ import { closeModal, decrement } from '../Article/articleSlice'
 function Modalka(props){
     const dispatch = useDispatch()
     let product = useSelector((state) => state.article.product)
-    console.log('rrr',product)
     if(useSelector((state => state.article.visible)) == false){
         return null
     }

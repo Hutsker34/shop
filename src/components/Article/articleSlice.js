@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "react-dom/test-utils";
 
 const initialState = {
   value: 0,
@@ -41,6 +42,11 @@ export const articleSlice = createSlice({
     },
     currentProduct: (state, action) => {
       state.product = action.payload;
+      
+    },
+    currentOrders: (state, action) => {
+      state.orders = action.payload;
+      console.log('111',action.payload)
     },
     decrement: (state, action) => {
       state.value -= 1;
@@ -78,6 +84,6 @@ export const articleSlice = createSlice({
   },
 );
 
-export const {  currentProduct,increment, decrement, incrementByAmount, closeModal , openModal} = articleSlice.actions;
+export const { currentOrders, currentProduct,increment, decrement, incrementByAmount, closeModal , openModal} = articleSlice.actions;
 
 export default articleSlice.reducer;

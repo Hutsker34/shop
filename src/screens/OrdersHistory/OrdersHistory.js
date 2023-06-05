@@ -9,6 +9,7 @@ import { useState , useEffect } from 'react';
 
 function OrdersHistory(){
     let [orders, setOrders] = useState([])
+    
 
     useEffect(()=>{
         axios.post(`${url}/orders/`,{
@@ -27,7 +28,7 @@ function OrdersHistory(){
             <Header/>
             <main className="site__main">
                 {orders.map((item,index)=> {
-                        console.log('item',item)
+                        
                         return <PastOrdersCard  {...item} key={index}/>
                 })}
             </main>
