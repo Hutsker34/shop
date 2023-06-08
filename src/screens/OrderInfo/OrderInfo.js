@@ -13,6 +13,8 @@ function OrderInfo(){
     const [product , setProducts] = useState([])
     const params = useParams();
     const orderInfo = useSelector((state) => state.article.orders)
+    const date = new Date(orderInfo.created_at);
+
     console.log('456',orderInfo)
     useEffect(() => {
         axios.get(`${url}/order/${params.id}/`,{
@@ -31,11 +33,13 @@ function OrderInfo(){
         <div className='site'>
             <Header/>
             <main className="site_main">
-                <span>заказ был оформлен {orderInfo.created_at}</span>
-                {product.map((item,index)=> {
-                    return <ProductInOrderCard  {...item} key={index}/>
-                })}
-                <span>полная стоимость {orderInfo.total_cost}$</span>
+                <span className="main__time">заказ был оформлен: {new Intl.DateTimeFormat('en-GB', { dateStyle: 'full', timeStyle: 'long', timeZone: 'Australia/Sydney'}).format(date)}</span>
+                <div className="main__products">
+                    {product.map((item,index)=> {
+                        return <ProductInOrderCard  {...item} key={index}/>
+                    })}
+                </div>
+                <span className="main__total-cost">полная стоимость заказа: {orderInfo.total_cost}$</span>
             </main>
             <Footer/>
         </div>
