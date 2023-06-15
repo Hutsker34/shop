@@ -174,8 +174,6 @@ function BankCardForm() {
 			</label>
 			
 			<input 
-				// onChange={onChange} 
-				// value = {value} 
 				id="number-card-form" 
 				maxLength="19" 
 				autoComplete="off"
