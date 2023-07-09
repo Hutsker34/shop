@@ -24,7 +24,7 @@ function Product(props){
     
     return(
         <div className='product'>
-            <Link onClick={() => dispatch(currentProduct(props))} to='/card-product'>
+            <Link onClick={() => dispatch(currentProduct(props))} to={`/card-product/${props.id}`}>
                 <img src={`${url}${props.img}`} alt='clothes' className='product__img'/>
             </Link>
             <div className='product__info'>

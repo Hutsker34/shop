@@ -2,7 +2,7 @@
     display: flex;
     max-height: 200px;
     background: white;
-    padding: 20px 0;
+    padding: 20px 60px;
     width: 70%;
     justify-content: space-around;
     margin: 0 auto;
@@ -13,6 +13,8 @@
 .order__catd--wrap{
     display: flex;
     align-items: center;
+    flex-grow: 1;
+    margin-left: 100px;
 
 }
 .order__card--span{

@@ -13,9 +13,8 @@ function OrderInfo(){
     const [product , setProducts] = useState([])
     const params = useParams();
     const orderInfo = useSelector((state) => state.article.orders)
-    const date = new Date(orderInfo.created_at);
 
-    console.log('456',orderInfo)
+
     useEffect(() => {
         axios.get(`${url}/order/${params.id}/`,{
             user_email: "marc4@gmail.com"
@@ -29,11 +28,34 @@ function OrderInfo(){
         })  
     }, [params.id])
 
+
+
+    if(!orderInfo.created_at){
+        return null
+    }
+    const date = new Date(orderInfo.created_at);
+    const options = {
+    timeZone: "Europe/Moscow",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    };
+
+const formatter = new Intl.DateTimeFormat("default", options);
+const formattedDateTime = formatter.format(date);
+    
+    console.log('date',orderInfo.created_at)
+
+    
+
     return (
         <div className='site'>
             <Header/>
             <main className="site_main">
-                <span className="main__time">заказ был оформлен: {new Intl.DateTimeFormat('en-GB', { dateStyle: 'full', timeStyle: 'long', timeZone: 'Australia/Sydney'}).format(date)}</span>
+                <span className="main__time">заказ был оформлен: {formattedDateTime}</span>
                 <div className="main__products">
                     {product.map((item,index)=> {
                         return <ProductInOrderCard  {...item} key={index}/>

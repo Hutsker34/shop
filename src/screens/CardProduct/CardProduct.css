@@ -22,7 +22,7 @@ html , body{
     display:flex;
 }
 .article__form--img{
-    height: 500px;
+    height: 400px;
 }
 .article__form--info{
     margin: 0 0 0 100px;

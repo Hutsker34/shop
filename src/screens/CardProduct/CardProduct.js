@@ -4,21 +4,36 @@ import Footer from '../../components/Footer/Footer'
 import { useDispatch } from 'react-redux'
 import { increment } from '../../components/Article/articleSlice'
 import { useSelector} from 'react-redux'
-
+import axios from 'axios'
+import { url } from '../../constants'
+import { useParams } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useState } from 'react'
 
 function CardProduct(props){
+    const [data ,setData] = useState([])
     const productInfo = useSelector((state) => state.article.product)
     const dispatch = useDispatch()
+    const params = useParams();
+    
+
+    useEffect(() => {
+    axios.get(`${url}/product/${params.id}/`)
+    .then(res => {
+        setData(res.data)
+        console.log(res);
+    })
+}, [params.id])
 
     return(
         <div className='cardProduct'>
             <Header/>
             <article className='cardProduct__article'>
                 <div className='article__form'>
-                    <img className='article__form--img' src={productInfo.img} alt='product'/>
+                    <img className='article__form--img' src={`${url}${data.img}`} alt='product'/>
                     <div className='article__form--info'>
-                        <h1 className='form__info--name'>{productInfo.name}</h1>
-                        <p className='form__info--cost'>{productInfo.cost}</p>
+                        <h1 className='form__info--name'>{data.name}</h1>
+                        <p className='form__info--cost'>{data.cost}</p>
                         <p className='article__additionalInfo'>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
                             quis vestibulum massa. Donec diam arcu, venenatis et ante eget, 
