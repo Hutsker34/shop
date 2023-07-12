@@ -30,7 +30,7 @@ function Product(props){
             <div className='product__info'>
                 <div className='product__info--wrap'>
                     <p className='product__name product__text'>{props.name}</p>
-                    <p className='product__cost product__text'>{props.cost}</p>
+                    <p className='product__cost product__text'>{props.cost}$</p>
                 </div>
                 <span>{props.amount}</span>
                 <div className='button__wrap'>

@@ -27,9 +27,43 @@ function Article(props){
     }
     return(
         <div className='article'>
-            {products.map((item,index)=> {
-                return <Product  {...item} key={index}/>
-            })}
+            <aside className='article__filters'>
+                <div className='filters__color--wrap'>
+                    <input type="checkbox"  />
+                    <label for="red">Красный</label>
+                </div>
+
+                <div className='filters__color--wrap'>
+                    <input type="checkbox"  />
+                    <label for="yellow">Желтый</label>
+                </div>
+                
+                <div className='filters__color--wrap'>
+                    <input type="checkbox"  />
+                    <label for="white">Белый</label>
+                </div>
+                
+                <div className='filters__color--wrap'>
+                    <input type="checkbox"  />
+                    <label for="black">Черный</label>
+                </div>
+                
+                <div className='aside__input--wrap'>
+                    <label>цена от:</label>
+                    <input placeholder='0,00$'></input>
+                </div>
+                <div className='aside__input--wrap'>
+                    <label>цена до:</label>
+                    <input placeholder='0,00$'></input>
+                </div>
+                <button className='aside__btn'>find</button>
+            </aside>
+            <div className='article__products'> 
+                {products.map((item,index)=> {
+                    return <Product  {...item} key={index}/>
+                })}
+            </div>
+            
         </div>
     )
 }
