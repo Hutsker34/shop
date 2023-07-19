@@ -32,6 +32,7 @@ function Article(props){
             })
         .then(res => {
             console.log(res)
+            setProducts(res.data)
         })
         .catch(err => {
             console.log(err);
