@@ -52,3 +52,13 @@ body{
     background: #e42121;
     color: white;
 }
+.no__find--results{
+    font-size: 22px;
+    margin-top: 150px;
+}
+.error__message{
+    color: rgb(219, 5, 5);
+    font-size: 14px;
+    text-align: start;
+    margin-top: 15px;
+}
