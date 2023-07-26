@@ -23,13 +23,13 @@ body{
     left: 160px;
     top: 120px;
     width: 220px;
-    height: 500px;
+    
     background: #C87A7A;
     display: flex;
     flex-direction: column;
     align-items: start;
     position: fixed;
-    padding: 50px 0 0 20px;
+    padding: 20px 0 20px 20px;
     border-radius: 5px;
 }
 .aside__input--wrap{
@@ -61,4 +61,9 @@ body{
     font-size: 14px;
     text-align: start;
     margin-top: 15px;
+}
+.form__p{
+    margin: 10px 0 10px 0;
+    font-size: 20px;
+    color: rgb(7, 33, 63)
 }
