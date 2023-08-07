@@ -4,7 +4,7 @@ import {url} from '../../constants'
 import axios from 'axios'
 import { useState , useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import headerSlice from '../Header/headerSlice';
+
 
 
 
@@ -16,6 +16,9 @@ function Article(props){
     let [error, setError] = useState(false)
 
     const inputValue = useSelector(state => (state.header.searchValue))
+    const inputProducts = useSelector(state => (state.header.filteredProducts))
+
+
 
     useEffect(()=>{
         axios.get(`${url}/products/`)
@@ -62,10 +65,11 @@ function Article(props){
                 selectedColors,
                 selectedTypes,
                 lowPrice: lowPrice ? lowPrice : undefined,
-                highPrice: highPrice ? highPrice : 500
+                highPrice: highPrice ? highPrice : 500,
+                filteredProducts: inputProducts
             })
         .then(res => {
-            console.log(res)
+            console.log('12345',res)
             setProducts(res.data)
             
 

@@ -3,7 +3,7 @@ import './Header.css'
 import icon from '../../assets/basket.png'
 import logo from '../../assets/logo.png'
 import { useSelector  , useDispatch} from 'react-redux'
-import { getSearchValue } from "./headerSlice";
+import { getSearchValue, getFiltredProducts } from "./headerSlice";
 import { useState} from "react";
 import axios from "axios";
 import { url } from "../../constants";
@@ -32,7 +32,7 @@ function Header(){
                 searchValue: searchValue,
             })
             .then(res => {
-                console.log(res)
+                dispatch(getFiltredProducts(res))
             })
             .catch(err => {
                 console.log(err);
