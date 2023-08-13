@@ -7,13 +7,17 @@ const initialState = {
   product: {},
   visible: false,
   orders: [],
-  
+  filteredProducts: []
 };
 
 export const articleSlice = createSlice({
   name: "article",
   initialState,
   reducers: {
+    getFiltredProducts: (state, action) => {
+      console.log('5678',action.payload)
+      state.filteredProducts = action.payload
+    },
     increment: (state, action) => {
       state.value += 1;
       let amount = 1;
@@ -84,6 +88,6 @@ export const articleSlice = createSlice({
   },
 );
 
-export const { currentOrders, currentProduct,increment, decrement, incrementByAmount, closeModal , openModal} = articleSlice.actions;
+export const {getFiltredProducts, currentOrders, currentProduct,increment, decrement, incrementByAmount, closeModal , openModal} = articleSlice.actions;
 
 export default articleSlice.reducer;

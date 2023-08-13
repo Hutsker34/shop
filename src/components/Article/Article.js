@@ -3,27 +3,29 @@ import Product from '../Product/Product'
 import {url} from '../../constants'
 import axios from 'axios'
 import { useState , useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector , useDispatch} from 'react-redux';
+import {getFiltredProducts} from './articleSlice'
 
 
 
 
 function Article(props){
     let [loading , setLoading] = useState(true)
-    let [products, setProducts] = useState([])
     let [lowPrice , setLowPrice] = useState(0)
     let [highPrice, setHighPrice]= useState(500)
     let [error, setError] = useState(false)
+    let dispatch = useDispatch()
 
     const inputValue = useSelector(state => (state.header.searchValue))
-    const inputProducts = useSelector(state => (state.header.filteredProducts))
+    const inputProducts = useSelector(state => (state.article.filteredProducts))
+    
 
 
 
     useEffect(()=>{
         axios.get(`${url}/products/`)
     .then(res => {
-        setProducts(res.data)
+        dispatch(getFiltredProducts(res.data))
         setLoading(false)
     })
     .catch(err => {
@@ -70,7 +72,7 @@ function Article(props){
             })
         .then(res => {
             console.log('12345',res)
-            setProducts(res.data)
+            dispatch(getFiltredProducts(res.data))
             
 
             
@@ -168,11 +170,11 @@ function Article(props){
                 <button type='submit'  className='aside__btn'>find</button>
             </form>
             <div className='article__products'> 
-                {products.map((item,index)=> {
+                {inputProducts.map((item,index)=> {
                     return <Product  {...item} key={index}/>
                 })}
             </div>
-            {products.length == 0 &&
+            {inputProducts.length == 0 &&
                 <div className='no__find--results'> нет результатов поиска по вашему запросу( </div>
             }
             
