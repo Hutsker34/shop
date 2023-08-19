@@ -21,7 +21,7 @@ function CardProduct(props){
     axios.get(`${url}/product/${params.id}/`)
     .then(res => {
         setData(res.data)
-        console.log(res);
+        
     })
 }, [params.id])
 

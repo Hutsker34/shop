@@ -36,12 +36,12 @@ function Basket(){
             
         })
         .then(res => {
-            console.log(res)
+            
         })
         .catch(err => {
             console.log(err);
         }) 
-        console.log('products',productsId)
+        
     }
 
     return(

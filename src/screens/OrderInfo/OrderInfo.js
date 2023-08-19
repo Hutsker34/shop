@@ -47,7 +47,7 @@ function OrderInfo(){
 const formatter = new Intl.DateTimeFormat("default", options);
 const formattedDateTime = formatter.format(date);
     
-    console.log('date',orderInfo.created_at)
+   
 
     
 

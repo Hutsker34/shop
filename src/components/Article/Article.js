@@ -5,6 +5,8 @@ import axios from 'axios'
 import { useState , useEffect } from 'react';
 import { useSelector , useDispatch} from 'react-redux';
 import {getFiltredProducts} from './articleSlice'
+import {getHighPrice,getProductColor ,getProductType, getlowPrice} from '../filters/filtersSlice'
+
 
 
 
@@ -37,9 +39,9 @@ function Article(props){
     function addLowprice(event){
         setLowPrice(+event.target.value)
         setError(false)
+        
     }
     function addHighprice(event){
-        
         setHighPrice(+event.target.value)
         setError(false)
         
@@ -55,7 +57,7 @@ function Article(props){
         const selectedTypes = Array.from(form.elements.clothType)
             .filter((checkbox) => checkbox.checked)
             .map((checkbox) => checkbox.value);
-        console.log(form.elements.color)
+        
         event.preventDefault();
         
         if(lowPrice > highPrice){
@@ -71,7 +73,9 @@ function Article(props){
                 filteredProducts: inputProducts
             })
         .then(res => {
-            console.log('12345',res)
+            console.log('456', highPrice)
+            dispatch(getlowPrice(lowPrice))
+            dispatch(getHighPrice(highPrice))
             dispatch(getFiltredProducts(res.data))
             
 
@@ -81,6 +85,8 @@ function Article(props){
         .catch(err => {
             console.log(err);
         })  
+        dispatch(getProductColor(selectedColors))
+        dispatch(getProductType(selectedTypes))
     }
 
 
