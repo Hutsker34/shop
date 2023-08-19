@@ -13,14 +13,14 @@ import { url } from "../../constants";
 function Header(){
     const dispatch = useDispatch()
     const count = useSelector((state) => state.article.value)
-    const color = useSelector((state) => state.filters.productColor)
-    const type = useSelector((state) => state.filters.productType)
+    const selectedColors = useSelector((state) => state.filters.productColor)
+    const selectedTypes = useSelector((state) => state.filters.productType)
     const lowPrice = useSelector((state) => state.filters.lowPrice)
     const highPrice = useSelector((state) => state.filters.hightPrice)
     
     const [searchValue, setSearchValue] = useState('')
     
-    console.log('123',highPrice)
+    
 
 
     
@@ -35,8 +35,8 @@ function Header(){
         if (event.key === 'Enter') {
             axios.post(`${url}/products_search/`,{
                 searchValue: searchValue,
-                color,
-                type,
+                selectedColors,
+                selectedTypes,
                 lowPrice: lowPrice ? lowPrice : undefined,
                 highPrice: highPrice ? highPrice : 500,
             })

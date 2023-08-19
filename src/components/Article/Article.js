@@ -5,7 +5,7 @@ import axios from 'axios'
 import { useState , useEffect } from 'react';
 import { useSelector , useDispatch} from 'react-redux';
 import {getFiltredProducts} from './articleSlice'
-import {getHighPrice,getProductColor ,getProductType, getlowPrice} from '../filters/filtersSlice'
+import {setHighPrice,setProductColor ,setProductType, setlowPrice} from '../filters/filtersSlice'
 
 
 
@@ -13,17 +13,32 @@ import {getHighPrice,getProductColor ,getProductType, getlowPrice} from '../filt
 
 function Article(props){
     let [loading , setLoading] = useState(true)
-    let [lowPrice , setLowPrice] = useState(0)
-    let [highPrice, setHighPrice]= useState(500)
+    
     let [error, setError] = useState(false)
     let dispatch = useDispatch()
 
     const inputValue = useSelector(state => (state.header.searchValue))
     const inputProducts = useSelector(state => (state.article.filteredProducts))
-    
+    const lowPrice = useSelector(state => (state.filters.lowPrice))
+    const highPrice = useSelector(state => (state.filters.highPrice))
 
+    const colors = [
+        {id:'red', name: 'красный' }, 
+        {id: 'yellow', name: 'желтый'},
+        {id: 'blue', name: 'синий'}, 
+        {id: 'white', name: 'белый'}, 
+        {id : 'black', name: 'черный'}, 
+        {id: 'green', name: 'зеленый'
+    }]
 
-
+    const types = [
+        {id:'red', name: 'красный' }, 
+        {id: 'yellow', name: 'желтый'}, 
+        {id: 'blue', name: 'синий'}, 
+        {id: 'white', name: 'белый'}, 
+        {id : 'black', name: 'черный'}, 
+        {id: 'green', name: 'зеленый'
+    }]
     useEffect(()=>{
         axios.get(`${url}/products/`)
     .then(res => {
@@ -37,14 +52,22 @@ function Article(props){
 
 
     function addLowprice(event){
-        setLowPrice(+event.target.value)
         setError(false)
-        
+        dispatch(setlowPrice(+event.target.value))
     }
     function addHighprice(event){
-        setHighPrice(+event.target.value)
         setError(false)
+        dispatch(setHighPrice(+event.target.value))
+    }
+    function addColor(event){
         
+        const id = event.target.id
+        const checked = event.target.checked
+        dispatch(setProductColor({id,checked}))
+    }
+    function addTypes(event){
+        
+        dispatch(setProductColor(+event.target.checked))
     }
 
     function addFilters(event){
@@ -73,20 +96,15 @@ function Article(props){
                 filteredProducts: inputProducts
             })
         .then(res => {
-            console.log('456', highPrice)
-            dispatch(getlowPrice(lowPrice))
-            dispatch(getHighPrice(highPrice))
+            
+            
             dispatch(getFiltredProducts(res.data))
-            
-
-            
-            
         })
         .catch(err => {
             console.log(err);
         })  
-        dispatch(getProductColor(selectedColors))
-        dispatch(getProductType(selectedTypes))
+        
+        dispatch(setProductType(selectedTypes))
     }
 
 
@@ -101,33 +119,17 @@ function Article(props){
 
                 <p className='form__p'>цвет:</p>
 
-                <div className='filters__color--wrap'>
-                    <input id='red' name='color' value='red' type="checkbox"  />
-                    <label htmlFor="red">Красный</label>
-                </div>
-
-                <div className='filters__color--wrap'>
-                    <input name='color' value='yellow' type="checkbox"  />
-                    <label htmlFor="yellow">Желтый</label>
-                </div>
                 
-                <div className='filters__color--wrap'>
-                    <input name='color' value='while' type="checkbox"  />
-                    <label htmlFor="white">Белый</label>
-                </div>
+                {colors.map((item,index) =>{
+                    return(
+                        <div  key={`colors-${index}`} className='filters__color--wrap'>
+                            <input onChange={addColor} id={item.id} name='color' value={item.id} type="checkbox"  />
+                            <label htmlFor={item.id}>{item.name}</label>
+                        </div>
+                    )
+                    
+                })}
                 
-                <div className='filters__color--wrap'>
-                    <input name='color' value='black' type="checkbox"  />
-                    <label htmlFor="black">Черный</label>
-                </div>
-                <div className='filters__color--wrap'>
-                    <input name='color' value='blue' type="checkbox"  />
-                    <label htmlFor="black">Синий</label>
-                </div>
-                <div className='filters__color--wrap'>
-                    <input name='color' value='green' type="checkbox"  />
-                    <label htmlFor="green">Зеленый</label>
-                </div>
 
 
                 <p className='form__p'>тип:</p>
@@ -162,11 +164,11 @@ function Article(props){
                 </div>
                 <div className='aside__input--wrap'>
                     <label>цена от:</label>
-                    <input onChange={addLowprice} placeholder='0,00$'></input>
+                    <input type='number' onChange={addLowprice} placeholder='0,00$'></input>
                 </div>
                 <div className='aside__input--wrap'>
                     <label>цена до:</label>
-                    <input onChange={addHighprice} placeholder='0,00$'></input>
+                    <input type='number' onChange={addHighprice} placeholder='0,00$'></input>
                 </div>
                 { error &&
                     <div className='error__message'>
