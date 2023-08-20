@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { act } from "react-dom/test-utils";
+
 
 const initialState = {
     lowPrice: 0,
@@ -27,7 +27,7 @@ export const filtersSlice= createSlice({
         },
         setProductColor: (state, action) => {
             
-            console.log(action.payload)
+            
             if(action.payload.checked){
                 state.productColor = [...state.productColor,action.payload.id]
             }else{
@@ -37,7 +37,14 @@ export const filtersSlice= createSlice({
             }
         },
         setProductType: (state, action) => {
-            state.productType = action.payload
+            console.log(action.payload)
+            if(action.payload.checked){
+                state.productType = [...state.productType,action.payload.id]
+            }else{
+                state.productType = state.productType.filter(item => {
+                    return item !== action.payload.id
+                })
+            }
         },
         
     }

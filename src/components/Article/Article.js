@@ -32,12 +32,12 @@ function Article(props){
     }]
 
     const types = [
-        {id:'red', name: 'красный' }, 
-        {id: 'yellow', name: 'желтый'}, 
-        {id: 'blue', name: 'синий'}, 
-        {id: 'white', name: 'белый'}, 
-        {id : 'black', name: 'черный'}, 
-        {id: 'green', name: 'зеленый'
+        {id:'cap', name: 'кепка' }, 
+        {id: 't-shirt', name: 'футболка'}, 
+        {id: 'glass', name: 'очки'}, 
+        {id: 'skirt', name: 'юбка'}, 
+        {id : 'pants', name: 'штаны'}, 
+        {id: 'jamper', name: 'свитер'
     }]
     useEffect(()=>{
         axios.get(`${url}/products/`)
@@ -66,8 +66,9 @@ function Article(props){
         dispatch(setProductColor({id,checked}))
     }
     function addTypes(event){
-        
-        dispatch(setProductColor(+event.target.checked))
+        const id = event.target.id
+        const checked = event.target.checked
+        dispatch(setProductType({id,checked}))
     }
 
     function addFilters(event){
@@ -135,33 +136,18 @@ function Article(props){
                 <p className='form__p'>тип:</p>
 
 
-                <div className='filters__color--wrap'>
-                    <input name='clothType' value='cap' type="checkbox"  />
-                    <label htmlFor="red">кепка</label>
-                </div>
+                
+                {types.map((item,index) =>{
+                    return(
+                        <div  key={`types-${index}`} className='filters__color--wrap'>
+                            <input onChange={addTypes} id={item.id} name='clothType' value={item.id} type="checkbox"  />
+                            <label htmlFor={item.id}>{item.name}</label>
+                        </div>
+                    )
+                    
+                })}
 
-                <div className='filters__color--wrap'>
-                    <input name='clothType' value='jamper' type="checkbox"  />
-                    <label htmlFor="red">свитер</label>
-                </div>
                 
-                <div className='filters__color--wrap'>
-                    <input name='clothType' value='T-shirt' type="checkbox"  />
-                    <label htmlFor="red">футболка</label>
-                </div>
-                
-                <div className='filters__color--wrap'>
-                    <input name='clothType' value='glass' type="checkbox"  />
-                    <label htmlFor="red">очки</label>
-                </div>
-                <div className='filters__color--wrap'>
-                    <input name='clothType' value='skirt' type="checkbox"  />
-                    <label htmlFor="red">юбка</label>
-                </div>
-                <div className='filters__color--wrap'>
-                    <input name='clothType' value='pants' type="checkbox"  />
-                    <label htmlFor="pants">штаны</label>
-                </div>
                 <div className='aside__input--wrap'>
                     <label>цена от:</label>
                     <input type='number' onChange={addLowprice} placeholder='0,00$'></input>
