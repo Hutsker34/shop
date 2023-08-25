@@ -94,7 +94,7 @@ function Article(props){
                 selectedTypes,
                 lowPrice: lowPrice ? lowPrice : undefined,
                 highPrice: highPrice ? highPrice : 500,
-                filteredProducts: inputProducts
+                
             })
         .then(res => {
             
