@@ -52,4 +52,5 @@ describe('Modalka', () => {
 
         expect(queryByText("are you sure?")).toBeNull();
     });
+    
 });

@@ -4,7 +4,7 @@ import {url} from '../../constants'
 import axios from 'axios'
 import { useState , useEffect } from 'react';
 import { useSelector , useDispatch} from 'react-redux';
-import {getFiltredProducts} from './articleSlice'
+import {getFiltredProducts,currentLoading} from './articleSlice'
 import {setHighPrice,setProductColor ,setProductType, setlowPrice} from '../filters/filtersSlice'
 
 
@@ -12,7 +12,7 @@ import {setHighPrice,setProductColor ,setProductType, setlowPrice} from '../filt
 
 
 function Article(props){
-    let [loading , setLoading] = useState(true)
+   
     
     let [error, setError] = useState(false)
     let dispatch = useDispatch()
@@ -21,35 +21,37 @@ function Article(props){
     const inputProducts = useSelector(state => (state.article.filteredProducts))
     const lowPrice = useSelector(state => (state.filters.lowPrice))
     const highPrice = useSelector(state => (state.filters.highPrice))
+    
 
     const colors = [
-        {id:'red', name: 'красный' }, 
-        {id: 'yellow', name: 'желтый'},
-        {id: 'blue', name: 'синий'}, 
-        {id: 'white', name: 'белый'}, 
-        {id : 'black', name: 'черный'}, 
-        {id: 'green', name: 'зеленый'
+        {id:'red', name: 'красный', testing_id: 'red' }, 
+        {id: 'yellow', name: 'желтый', testing_id: 'yellow'},
+        {id: 'blue', name: 'синий', testing_id: 'blue'}, 
+        {id: 'white', name: 'белый', testing_id: 'white'}, 
+        {id : 'black', name: 'черный', testing_id: 'black'}, 
+        {id: 'green', name: 'зеленый', testing_id: 'green'
     }]
 
     const types = [
-        {id:'cap', name: 'кепка' }, 
-        {id: 't-shirt', name: 'футболка'}, 
-        {id: 'glass', name: 'очки'}, 
-        {id: 'skirt', name: 'юбка'}, 
-        {id : 'pants', name: 'штаны'}, 
-        {id: 'jamper', name: 'свитер'
+        {id:'cap', name: 'кепка' , testing_id: 'cap'}, 
+        {id: 't-shirt', name: 'футболка', testing_id: 't-shirt'}, 
+        {id: 'glass', name: 'очки', testing_id: 'glass'}, 
+        {id: 'skirt', name: 'юбка', testing_id: 'skirt'}, 
+        {id : 'pants', name: 'штаны', testing_id: 'pants'}, 
+        {id: 'jamper', name: 'свитер', testing_id: 'jamper'
     }]
     useEffect(()=>{
         axios.get(`${url}/products/`)
     .then(res => {
         dispatch(getFiltredProducts(res.data))
-        setLoading(false)
+        
     })
     .catch(err => {
         console.log(err);
     })  
     }, [])
 
+    console.log(inputProducts)
 
     function addLowprice(event){
         setError(false)
@@ -109,7 +111,7 @@ function Article(props){
     }
 
 
-    if(loading){
+    if(!inputProducts || inputProducts.length == 0){
         return(
             <div>loading</div>
         )
@@ -124,7 +126,7 @@ function Article(props){
                 {colors.map((item,index) =>{
                     return(
                         <div  key={`colors-${index}`} className='filters__color--wrap'>
-                            <input onChange={addColor} id={item.id} name='color' value={item.id} type="checkbox"  />
+                            <input onChange={addColor} data-testid={item.testing_id} id={item.id} name='color' value={item.id} type="checkbox"  />
                             <label htmlFor={item.id}>{item.name}</label>
                         </div>
                     )
@@ -140,7 +142,7 @@ function Article(props){
                 {types.map((item,index) =>{
                     return(
                         <div  key={`types-${index}`} className='filters__color--wrap'>
-                            <input onChange={addTypes} id={item.id} name='clothType' value={item.id} type="checkbox"  />
+                            <input onChange={addTypes} data-testid={item.testing_id} id={item.id} name='clothType' value={item.id} type="checkbox"  />
                             <label htmlFor={item.id}>{item.name}</label>
                         </div>
                     )
@@ -154,14 +156,14 @@ function Article(props){
                 </div>
                 <div className='aside__input--wrap'>
                     <label>цена до:</label>
-                    <input type='number' onChange={addHighprice} placeholder='0,00$'></input>
+                    <input data-testid='highPrice' type='number' onChange={addHighprice} placeholder='0,00$'></input>
                 </div>
                 { error &&
                     <div className='error__message'>
                         указанно некорректное значение 
                     </div>
                 }
-                <button type='submit'  className='aside__btn'>find</button>
+                <button type='submit' data-testid='test_find-btn'  className='aside__btn'>find</button>
             </form>
             <div className='article__products'> 
                 {inputProducts.map((item,index)=> {

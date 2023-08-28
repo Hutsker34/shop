@@ -7,7 +7,8 @@ const initialState = {
   product: {},
   visible: false,
   orders: [],
-  filteredProducts: []
+  filteredProducts: [],
+ 
 };
 
 export const articleSlice = createSlice({
@@ -52,6 +53,7 @@ export const articleSlice = createSlice({
       state.orders = action.payload;
       
     },
+   
     decrement: (state, action) => {
       state.value -= 1;
       let amount = 0 
