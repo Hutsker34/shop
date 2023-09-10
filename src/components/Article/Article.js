@@ -107,7 +107,7 @@ function Article(props){
             console.log(err);
         })  
         
-        dispatch(setProductType(selectedTypes))
+       
     }
 
 
