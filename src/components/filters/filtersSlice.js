@@ -37,7 +37,7 @@ export const filtersSlice= createSlice({
             }
         },
         setProductType: (state, action) => {
-            console.log(action.payload)
+            
             if(action.payload.checked){
                 state.productType = [...state.productType,action.payload.id]
             }else{

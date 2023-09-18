@@ -59,7 +59,7 @@ function Header(){
                 <Link to="/">
                     <img className='header__logo' alt='logo' src={logo}/>
                 </Link>
-                <input onKeyDown={sendSearchvalue}  onChange={getInputValue} value={searchValue} className='header__input'/>
+                <input onKeyDown={sendSearchvalue} data-testid='searchbar'  onChange={getInputValue} value={searchValue} className='header__input'/>
             </div>
             <div className='header__info'>
                 <Link className="header__name--link" to="/userProfile">

@@ -21,6 +21,8 @@ function Article(props){
     const inputProducts = useSelector(state => (state.article.filteredProducts))
     const lowPrice = useSelector(state => (state.filters.lowPrice))
     const highPrice = useSelector(state => (state.filters.highPrice))
+    const selectedColors = useSelector(state => (state.filters.productColor))
+    const selectedTypes = useSelector(state => (state.filters.productType))
     
 
     const colors = [
@@ -51,7 +53,7 @@ function Article(props){
     })  
     }, [])
 
-    console.log(inputProducts)
+    
 
     function addLowprice(event){
         setError(false)
@@ -62,7 +64,6 @@ function Article(props){
         dispatch(setHighPrice(+event.target.value))
     }
     function addColor(event){
-        
         const id = event.target.id
         const checked = event.target.checked
         dispatch(setProductColor({id,checked}))
@@ -74,16 +75,6 @@ function Article(props){
     }
 
     function addFilters(event){
-
-        const form = event.target;
-        const selectedColors = Array.from(form.elements.color)
-            .filter((checkbox) => checkbox.checked)
-            .map((checkbox) => checkbox.value);
-
-        const selectedTypes = Array.from(form.elements.clothType)
-            .filter((checkbox) => checkbox.checked)
-            .map((checkbox) => checkbox.value);
-        
         event.preventDefault();
         
         if(lowPrice > highPrice){
@@ -99,8 +90,6 @@ function Article(props){
                 
             })
         .then(res => {
-            
-            
             dispatch(getFiltredProducts(res.data))
         })
         .catch(err => {
@@ -111,7 +100,7 @@ function Article(props){
     }
 
 
-    if(!inputProducts || inputProducts.length == 0){
+    if(!inputProducts ){
         return(
             <div>loading</div>
         )
