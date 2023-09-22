@@ -63,7 +63,7 @@ test('render states with products', async () => {
       </BrowserRouter>
     );
   });
-  const linkElement = screen.queryByText(/нет результатов поиска по вашему запросу/i);
+  const linkElement = screen.queryByText(/loading/i);
   expect(linkElement).toBeNull();
 });
 
