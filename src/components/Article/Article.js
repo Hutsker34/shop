@@ -90,6 +90,7 @@ function Article(props){
                 
             })
         .then(res => {
+           
             dispatch(getFiltredProducts(res.data))
         })
         .catch(err => {

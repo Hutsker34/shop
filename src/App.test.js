@@ -19,10 +19,35 @@ jest.mock("react-router-dom", () => ({
 
  jest.mock('axios');
 
-
-  axios.post.mockResolvedValue({ data: [] })
-  axios.get.mockResolvedValue({ data: [] });
- 
+const testProducts = [
+  {
+      "id": 20,
+      "name": "pink T-shirt",
+      "cost": 101,
+      "img": "/media/assets/pink__t-shirt.png",
+      "color": "red",
+      "type": "t-shirt"
+  },
+  {
+      "id": 22,
+      "name": "pink skirt",
+      "cost": 91,
+      "img": "/media/assets/Pink-Skirt.png",
+      "color": "red",
+      "type": "skirt"
+  },
+  {
+      "id": 27,
+      "name": "pink pants",
+      "cost": 67,
+      "img": "/media/assets/pink-pants.png",
+      "color": "red",
+      "type": "pants"
+  }
+];
+  
+axios.get.mockResolvedValue({ data: [] });
+  
 
 const createStore = (initialState = {}) => {
   return configureStore({
@@ -83,7 +108,7 @@ test('render states with products', async () => {
       "selectedTypes": ['glass','pants','t-shirt'],
     };
 
-    
+    axios.post.mockResolvedValue({ data: [] }) 
     
     const { getByTestId } = render(
       <BrowserRouter>
@@ -114,58 +139,65 @@ test('render states with products', async () => {
       expect(spy).toHaveBeenCalledWith({ type: 'filters/setProductType' ,payload: {id : 't-shirt', checked: true}});
       expect(spy).toHaveBeenCalledWith({ type: 'filters/setHighPrice' ,payload: 70});
       await waitFor(() => {
+        
         expect(axios.post).toHaveBeenCalledWith(expectedUrl, expectedPayload);
     });
+    
 
   });
 
   
 
-  // it('calls onClick prop when search bar and checkbox is clicked', async () => {
-  //   const store = createStore({ article: { filteredProducts: [{}] } });
-  //   const spy = jest.spyOn(store, 'dispatch');
-  //   const expectedUrl = "http://127.0.0.1:8000/products_search/"; 
+  it('calls onClick prop when search bar and checkbox is clicked', async () => {
+    const store = createStore({ article: { filteredProducts: [{}] } });
+    const spy = jest.spyOn(store, 'dispatch');
+    const expectedUrl = "http://127.0.0.1:8000/products_search/"; 
 
-  //   const expectedPayload = {
-  //     "highPrice": 500,
-  //     "lowPrice": undefined,
-  //     "searchValue": "",
-  //     "selectedColors": [],
-  //     "selectedTypes": [],
-  //   };
+    const expectedPayload = {
+      "highPrice": 500,
+      "lowPrice": undefined,
+      "searchValue": "pink",
+      "selectedColors": [],
+      "selectedTypes": [],
+    };
 
+    axios.post.mockImplementationOnce(() => Promise.resolve({data:testProducts}));
+
+    const { getByTestId } = render(
+      <BrowserRouter>
+        <Provider store={store}>
+            <App />
+        </Provider>
+      </BrowserRouter>
+      );
+     
+      const searchbar = getByTestId('searchbar')
+      
+      userEvent.type(searchbar, 'pink');
+      userEvent.keyboard('{enter}')
+    
+      expect(spy).toHaveBeenCalledWith({ type: "header/getSearchValue" ,payload: 'p'});
+      expect(spy).toHaveBeenCalledWith({ type: "header/getSearchValue" ,payload: 'pi'});
+      expect(spy).toHaveBeenCalledWith({ type: "header/getSearchValue" ,payload: 'pin'});
+      expect(spy).toHaveBeenCalledWith({ type: "header/getSearchValue" ,payload: 'pink'});
+      await waitFor(() => {
+        expect(axios.post).toHaveBeenCalledWith(expectedUrl, expectedPayload);
+    });
+    
+    expect(spy).toHaveBeenCalledWith({ type: "article/getFiltredProducts" ,payload: testProducts});
+    const productOneElement = screen.queryByText(testProducts[0].name);
+    const productTwoElement = screen.queryByText(testProducts[1].name);
+    const productThreeElement = screen.queryByText(testProducts[2].name);
+
+    const nonExpectionProduct = screen.queryByText('123123');
+
+
+    expect(productOneElement).toBeTruthy();
+    expect(productTwoElement).toBeTruthy();
+    expect(productThreeElement).toBeTruthy();
+
+
+    expect(nonExpectionProduct).toBeNull();
     
 
-  //   const { getByTestId } = render(
-  //     <BrowserRouter>
-  //       <Provider store={store}>
-  //           <App />
-  //       </Provider>
-  //     </BrowserRouter>
-  //     );
-     
-  //     const searchbar = getByTestId('searchbar')
-  //     // const type_pants = getByTestId('pants')
-  //     // const highPrice = getByTestId('highPrice')
-  //     // const type_glass = getByTestId('glass')
-  //     const find_btn = getByTestId('test_find-btn')
-      
-      
-
-  //     userEvent.click(type_glass);
-  //     userEvent.click(type_pants);
-  //     userEvent.click(type_Tshirt);
-  //     userEvent.type(highPrice, '70');
-  //     userEvent.click(find_btn)
-
-      
-
-  //     expect(spy).toHaveBeenCalledWith({ type: 'filters/setProductType' ,payload: {id : 'glass', checked: true}});
-  //     expect(spy).toHaveBeenCalledWith({ type: 'filters/setProductType' ,payload: {id : 'pants', checked: true}});
-  //     expect(spy).toHaveBeenCalledWith({ type: 'filters/setProductType' ,payload: {id : 't-shirt', checked: true}});
-  //     expect(spy).toHaveBeenCalledWith({ type: 'filters/setHighPrice' ,payload: {id : 'highPrice',inputValue: '70', checked: true}});
-  //     await waitFor(() => {
-  //       expect(axios.post).toHaveBeenCalledWith(expectedUrl, expectedPayload);
-  //   });
-
-  // });
+  });
