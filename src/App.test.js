@@ -172,9 +172,11 @@ test('render states with products', async () => {
       );
      
       const searchbar = getByTestId('searchbar')
+      const highPrice = getByTestId('highPrice')
       
       userEvent.type(searchbar, 'pink');
       userEvent.keyboard('{enter}')
+      fireEvent.change(highPrice, { target: { value: 70 }})
     
       expect(spy).toHaveBeenCalledWith({ type: "header/getSearchValue" ,payload: 'p'});
       expect(spy).toHaveBeenCalledWith({ type: "header/getSearchValue" ,payload: 'pi'});
@@ -187,14 +189,14 @@ test('render states with products', async () => {
     expect(spy).toHaveBeenCalledWith({ type: "article/getFiltredProducts" ,payload: testProducts});
     const productOneElement = screen.queryByText(testProducts[0].name);
     const productTwoElement = screen.queryByText(testProducts[1].name);
-    const productThreeElement = screen.queryByText(testProducts[2].name);
+    
 
     const nonExpectionProduct = screen.queryByText('123123');
 
 
     expect(productOneElement).toBeTruthy();
     expect(productTwoElement).toBeTruthy();
-    expect(productThreeElement).toBeTruthy();
+    
 
 
     expect(nonExpectionProduct).toBeNull();
