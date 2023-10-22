@@ -37,6 +37,16 @@ describe('Should load products', () => {
         await browser.pause(1000)
         // Проверяем, что в корзине два товара
         await expect((await $('.basket__link span'))).toHaveText('2')
+
+
+        // переходим в карзину
+
+        await $('.basket__link').click()
+        await browser.pause(1000)
+
+        
+        await expect((await $('.generalCost__cost'))).toHaveText('166.00$')
+        
     })
     
 })
